@@ -1,0 +1,13 @@
+[
+  {
+    "id": 101,
+    "nombre": "Carlos Sánchez",
+    "doctorAsignadoId": 202
+    
+  },
+  {
+    "id": 102,
+    "nombre": "María Ramírez",
+    "doctorAsignadoId": 201
+  }
+]

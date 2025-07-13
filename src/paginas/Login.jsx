@@ -1,0 +1,45 @@
+
+import { useNavigate, useLocation } from 'react-router-dom';
+import Formulario from "../componentes/Form/form";
+
+function Login({onLoginPatient,onLoginMedic}){
+
+    const navigate = useNavigate(); 
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const rol = queryParams.get('rol');
+
+    // Datos de los inputs
+    const inputUsuario = { id: 'nombre', label: 'Nombre', type: 'text', placeholder: 'Ingresa tu nombre' };
+    const inputContraseña = { id: 'password', label: 'Contraseña', type: 'password', placeholder: 'Ingresa tu contraseña' };
+
+// Array de inputs
+    const camposFormulario = [inputUsuario, inputContraseña];
+
+    const handleLogin =(formData) => {
+
+        // Para verificar que tenga el campo `nombre`
+
+        if(rol==='paciente'){
+            onLoginPatient();
+            navigate('/paciente/dashboard',{ state: { paciente: formData.nombre } });
+
+        }
+        else if (rol==='medico'){
+            onLoginMedic();
+           navigate('/medico/dashboard', { state: { doctor: formData.nombre } }); 
+        }
+        else{   
+            navigate('/'); 
+        }
+
+    };
+
+    return(
+        <div>
+            <Formulario campos={camposFormulario} handleLogin={handleLogin}/>
+            
+        </div>
+    );
+}
+export default Login;

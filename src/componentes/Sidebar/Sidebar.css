@@ -1,0 +1,9 @@
+.imagen {
+  width: 100%;          /* Para que se ajuste al ancho del contenedor */
+  max-width: 150px;     /* Límite máximo para que no crezca más */
+  height: auto;         /* Mantiene la proporción */
+  object-fit: cover;    /* Recorta la imagen si se pasa del contenedor */
+  border-radius: 8px;   /* Opcional: bordes redondeados */
+  display: block;
+  margin: 0 auto;       /* Centra horizontalmente */
+}
