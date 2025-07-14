@@ -1,9 +1,27 @@
+import { useState } from 'react';
+
 function HistorialPaciente({doctores,pacientes,historialConsultas}){
+
+  const [busqueda, setBusqueda] = useState('');
+
+
+  const historialFiltrado = historialConsultas.filter((consulta) => {
+  const doctor = doctores.find(d => d.id === consulta.doctorConsultaId);
+  return doctor?.nombre.toLowerCase().includes(busqueda.toLowerCase());
+});
     return(
 
     <div className="card__container">
       <h2>Historial de consultas</h2>
-      {historialConsultas.map((consulta) => {
+      <input
+        type="text"
+        placeholder="Ingrese el nombre del doctor"
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+        className="form-control mb-3 card__input"
+      />
+
+      {historialFiltrado.map((consulta) => {
         const paciente = pacientes.find(p => p.id === consulta.pacienteId);
         const doctor = doctores.find(d => d.id === consulta.doctorConsultaId);
 

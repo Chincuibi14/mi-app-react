@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 function GestionarConsulta({doctores,pacientes,consultasPaciente}){
 
+    const [busqueda, setBusqueda] = useState('');
+
     const [citaSeleccionada, setCitaSeleccionada] = useState(null); // ID de la cita seleccionada
     const [nuevoHorario, setNuevoHorario] = useState(''); // Horario elegido
   
@@ -22,13 +24,26 @@ function GestionarConsulta({doctores,pacientes,consultasPaciente}){
 
   };
 
+  const consultasFiltradas = consultasPaciente.filter((consulta) => {
+  const doctor = doctores.find(d => d.id === consulta.doctorConsultaId);
+  return doctor?.nombre.toLowerCase().includes(busqueda.toLowerCase());
+});
+
 
     return(
 
     <div className="card__container">
       <h2>Gestionar consultas</h2>
+
+      <input
+        type="text"
+        placeholder="Ingrese el nombre del doctor"
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+        className="form-control mb-3 card__input"
+      />
       
-      {consultasPaciente.map((consulta) => {
+      {consultasFiltradas.map((consulta) => {
         const paciente = pacientes.find(p => p.id === consulta.pacienteId);
         const doctor = doctores.find(d => d.id === consulta.doctorConsultaId);
         const horarios = doctor?.horariosDisponibles || [];

@@ -5,6 +5,7 @@ function Citas({doctores,pacientes,consultas}){
 
   const [citaSeleccionada, setCitaSeleccionada] = useState(null); // ID de la cita seleccionada
   const [nuevoHorario, setNuevoHorario] = useState(''); // Horario elegido
+  const [busqueda, setBusqueda] = useState('');
 
 
   const handleCambiarCita = (id) => {
@@ -21,13 +22,24 @@ function Citas({doctores,pacientes,consultas}){
     alert('Cita cancelada exitosamente');
 
   };
+  const consultasFiltradas = consultas.filter((consulta) => {
+  const paciente = pacientes.find(p => p.id === consulta.pacienteId);
+  return paciente?.nombre.toLowerCase().includes(busqueda.toLowerCase());
+});
 
   return (
     <div className="card__container">
 
       <h2>Citas</h2>
+      <input
+        type="text"
+        placeholder="Ingrese el nombre del paciente"
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+        className="form-control mb-3 card__input"
+      />
 
-      {consultas.map((consulta) => {
+      {consultasFiltradas.map((consulta) => {
         const paciente = pacientes.find(p => p.id === consulta.pacienteId);
         const doctor = doctores.find(d => d.id === consulta.doctorConsultaId);
         const horarios = doctor?.horariosDisponibles || [];
