@@ -12,6 +12,8 @@ function Sidebar({campos,imagen,seleccion,handleLogout}){
 
     const cerrarSesion = () => {
         handleLogout(); // pone en false los estados
+        localStorage.removeItem('rol');
+        localStorage.removeItem('id');
         navigate('/'); // redirige al inicio
   };
 

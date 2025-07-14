@@ -8,7 +8,7 @@ function PacienteDashboard({doctores,pacientes,consultas,handleLogout}){
 
   const [vistaActiva, setVistaActiva] = useState('citas');
   const location= useLocation();
-  const pacienteId=location.state?.paciente;
+  const pacienteId=location.state?.paciente || localStorage.getItem('id');
 
   
   const pacienteSeleccionado=pacientes.find(p=>p.id === Number(pacienteId));

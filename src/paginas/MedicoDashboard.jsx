@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 function MedicoDashboard({doctores,pacientes,consultas,handleLogout}){
 
   const location= useLocation();
-  const doctorId=location.state?.doctor;
+  const doctorId=location.state?.doctor || localStorage.getItem('id');
   
   const doctorSeleccionado=doctores.find(doc=>doc.id === Number(doctorId));
   

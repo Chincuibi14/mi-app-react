@@ -1,6 +1,7 @@
 
 import './App.css';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route, Navigate} from 'react-router-dom';
 import Header from './componentes/Header/header';
 import Footer from './componentes/Footer/footer';
@@ -16,10 +17,21 @@ function App() {
   const [isMedicLoggedIn, setIsMedicLoggedIn] = useState(false);
   const { doctores, pacientes, consultas} = useLoadData();
 
+  
   const handleLogout = () => {
   setIsMedicLoggedIn(false);
   setIsPacientLoggedIn(false);
 };
+  useEffect(() => {
+    const rol = localStorage.getItem('rol');
+    const id = localStorage.getItem('id');
+
+    if (rol === 'paciente' && id) {
+      setIsPacientLoggedIn(true);
+    } else if (rol === 'medico' && id) {
+      setIsMedicLoggedIn(true);
+    }
+  }, []);
 
   return (
     <div>
@@ -31,7 +43,8 @@ function App() {
         <Routes>
 
           <Route path="/" element={<Inicio/>} />
-          <Route path="/login"  element={<Login onLoginPatient={() => setIsPacientLoggedIn(true)} onLoginMedic={()=>setIsMedicLoggedIn(true)} />} />
+          <Route path="/login"  element={<Login onLoginPatient={() => setIsPacientLoggedIn(true)} onLoginMedic={()=>setIsMedicLoggedIn(true)}
+                                          onLogoffPatient={() => setIsPacientLoggedIn(false)} onLogoffMedic={()=>setIsMedicLoggedIn(false)}/>} />
           
           <Route path="/medico/dashboard" element={
             isMedicLoggedIn? (

@@ -2,7 +2,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import Formulario from "../componentes/Form/form";
 
-function Login({onLoginPatient,onLoginMedic}){
+function Login({onLoginPatient,onLoginMedic,onLogoffMedic,onLogoffPatient}){
 
     const navigate = useNavigate(); 
     const location = useLocation();
@@ -23,12 +23,20 @@ function Login({onLoginPatient,onLoginMedic}){
         // Para verificar que tenga el campo `nombre`
 
         if(rol==='paciente'){
+
             onLoginPatient();
+            localStorage.setItem("rol", "paciente");
+            localStorage.setItem("id", idPaciente);
+            onLogoffMedic();
+
             navigate('/paciente/dashboard',{ state: { paciente: idPaciente} });
 
         }
         else if (rol==='medico'){
             onLoginMedic();
+            onLogoffPatient();
+            localStorage.setItem("rol", "medico");
+            localStorage.setItem("id", idDoctor);
            navigate('/medico/dashboard', { state: { doctor: idDoctor } }); 
         }
         else{   
