@@ -18,7 +18,9 @@ function MedicoDashboard({doctores,pacientes,consultas,handleLogout}){
     const campo1= {variante:'primary',onClick: ()=>setVistaActiva('citas'),size:'',type:'',className:'',texto:"Citas"};
     const campo2 ={variante:'primary',onClick: ()=>setVistaActiva('pacientes'),size:'',type:'',className:'',texto:'Pacientes'};
     const campo3 ={variante:'primary',onClick: ()=>setVistaActiva('historial'),size:'',type:'',className:'',texto:'Historial'};
-    const imagen={src:"/imagenes/drHombre2.jpg",alt:"Imagen de un medico",className:'imagen'};
+    const imagen = doctorSeleccionado
+    ? { src: doctorSeleccionado.imagen, alt: "Imagen de un medico", className: 'imagen' }
+    : { src: "/imagenes/icono.png", alt: "Imagen no encontrada", className: 'imagen' };
     const campos= [campo1,campo2,campo3];
     
 

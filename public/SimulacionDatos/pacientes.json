@@ -2,12 +2,14 @@
   {
     "id": 101,
     "nombre": "Carlos Sánchez",
-    "doctorAsignadoId": 202
+    "doctorAsignadoId": 202,
+    "imagen":"/imagenes/icono.png"
     
   },
   {
     "id": 102,
     "nombre": "María Ramírez",
-    "doctorAsignadoId": 201
+    "doctorAsignadoId": 201,
+    "imagen":"/imagenes/icono.png"
   }
 ]

@@ -18,16 +18,18 @@ function Login({onLoginPatient,onLoginMedic}){
 
     const handleLogin =(formData) => {
 
+        const idPaciente = formData.nombre?.trim() || 101; 
+        const idDoctor = formData.nombre?.trim() || 201; 
         // Para verificar que tenga el campo `nombre`
 
         if(rol==='paciente'){
             onLoginPatient();
-            navigate('/paciente/dashboard',{ state: { paciente: formData.nombre } });
+            navigate('/paciente/dashboard',{ state: { paciente: idPaciente} });
 
         }
         else if (rol==='medico'){
             onLoginMedic();
-           navigate('/medico/dashboard', { state: { doctor: formData.nombre } }); 
+           navigate('/medico/dashboard', { state: { doctor: idDoctor } }); 
         }
         else{   
             navigate('/'); 

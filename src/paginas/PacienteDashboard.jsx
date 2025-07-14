@@ -16,7 +16,9 @@ function PacienteDashboard({doctores,pacientes,consultas,handleLogout}){
     const campo1= {variante:'primary',onClick: ()=>setVistaActiva('citas'),size:'',type:'',className:'',texto:"Citas"};
     const campo2 ={variante:'primary',onClick: ()=>setVistaActiva('gestionar'),size:'',type:'',className:'',texto:'Gestionar Consulta'};
     const campo3 ={variante:'primary',onClick: ()=>setVistaActiva('historial'),size:'',type:'',className:'',texto:'Historial'};
-    const imagen={src:"/imagenes/icono.png",alt:"Imagen de un usuario",className:'imagen'};
+    const imagen = pacienteSeleccionado
+  ? { src: pacienteSeleccionado.imagen, alt: "Imagen de un usuario", className: 'imagen' }
+  : { src: "/imagenes/icono.png", alt: "Imagen no encontrada", className: 'imagen' };
     const campos= [campo1,campo2,campo3];
     
 
