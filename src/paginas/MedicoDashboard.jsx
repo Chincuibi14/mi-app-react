@@ -6,13 +6,16 @@ import { useLocation } from 'react-router-dom';
 
 function MedicoDashboard({doctores,pacientes,consultas,handleLogout}){
 
+
+  /*Aqui usamos useLocation para poder accesar al localStorage, eso nos permite que cuando se cambie de pantalla como a Home
+    podremos accesar a los datos previamente guardados y que el usuario pueda continuar con su sesion, a menos que le de a 
+    cerrar sesion. */
   const location= useLocation();
   const doctorId=location.state?.doctor || localStorage.getItem('id');
-  
   const doctorSeleccionado=doctores.find(doc=>doc.id === Number(doctorId));
   
 
-
+  // Aqui declareamos el use state que nos ayudara a controlas las posibles vistas del dashboard del medico, citas, pacientes e historial
     const [vistaActiva, setVistaActiva] = useState('citas');
 
     const campo1= {variante:'primary',onClick: ()=>setVistaActiva('citas'),size:'',type:'',className:'',texto:"Citas"};

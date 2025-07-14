@@ -18,10 +18,17 @@ function App() {
   const { doctores, pacientes, consultas} = useLoadData();
 
   
+  // ESta funcion nos ayudara a setear nuestras variables en false y que cuando queramos accesar a los dashboard tengamos que volver
+  // a pasar por el form de incio de sesion. 
+
   const handleLogout = () => {
   setIsMedicLoggedIn(false);
   setIsPacientLoggedIn(false);
 };
+
+// Esta es uan medida de seguridad que cuando una persona logeada va al home, se puedan guardar su informacion y pueda regresar sin tener que volver a inciar
+// sesion.
+
   useEffect(() => {
     const rol = localStorage.getItem('rol');
     const id = localStorage.getItem('id');
@@ -39,10 +46,14 @@ function App() {
       
       <main className="container my-4">
         
-
+      {/*Aqui sucede lo siguiente, cuando queremos accesar por primer vez a algunos de nuestro dashboards, validamos las variables ...LoggedIn
+      si estan en false nos llevara al forms correspondiente (si es medico o paciente) para poder iniciar sesion. Dependiendo del dashboard de mandan
+      ciertos datos que nos seran de utilidad mientra el backend no este desarrollado.
+      */}
         <Routes>
 
           <Route path="/" element={<Inicio/>} />
+
           <Route path="/login"  element={<Login onLoginPatient={() => setIsPacientLoggedIn(true)} onLoginMedic={()=>setIsMedicLoggedIn(true)}
                                           onLogoffPatient={() => setIsPacientLoggedIn(false)} onLogoffMedic={()=>setIsMedicLoggedIn(false)}/>} />
           
@@ -76,8 +87,7 @@ function App() {
           }
            />
 
-          <Route path="/paciente/expediente/:id" element={<h1>Expediente Paciente</h1>} />
-          <Route path="/paciente/agendar" element={<h1>Agendar Consulta</h1>} />
+
         </Routes>
     
       </main>

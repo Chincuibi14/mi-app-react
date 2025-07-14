@@ -6,12 +6,18 @@ import { useState } from "react";
 
 function PacienteDashboard({doctores,pacientes,consultas,handleLogout}){
 
-  const [vistaActiva, setVistaActiva] = useState('citas');
-  const location= useLocation();
-  const pacienteId=location.state?.paciente || localStorage.getItem('id');
+    /*Aqui usamos useLocation para poder accesar al localStorage, eso nos permite que cuando se cambie de pantalla como a Home
+    podremos accesar a los datos previamente guardados y que el usuario pueda continuar con su sesion, a menos que le de a 
+    cerrar sesion. */
+    
 
-  
-  const pacienteSeleccionado=pacientes.find(p=>p.id === Number(pacienteId));
+    const location= useLocation();
+    const pacienteId=location.state?.paciente || localStorage.getItem('id');
+    const pacienteSeleccionado=pacientes.find(p=>p.id === Number(pacienteId));
+
+    // Aqui declareamos el use state que nos ayudara a controlas las posibles vistas del dashboard del medico, citas, pacientes e historial
+    const [vistaActiva, setVistaActiva] = useState('citas');
+
 
     const campo1= {variante:'primary',onClick: ()=>setVistaActiva('citas'),size:'',type:'',className:'',texto:"Citas"};
     const campo2 ={variante:'primary',onClick: ()=>setVistaActiva('gestionar'),size:'',type:'',className:'',texto:'Gestionar Consulta'};

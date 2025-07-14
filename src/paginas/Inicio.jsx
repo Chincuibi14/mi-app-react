@@ -3,8 +3,10 @@ import Carrusel from "../componentes/Carrusel/Carrusel";
 function Inicio(){
 
     return(
-
+  
         <div>
+            {/* Aqui se usa el componente Casrrusel el cual recibe tres imagenes como entrada*/}
+
             <h1 className="text-center mt-4">Bienvenido a la App Médica</h1>
             <Carrusel
             

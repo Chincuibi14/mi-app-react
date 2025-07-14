@@ -4,7 +4,11 @@ import Formulario from "../componentes/Form/form";
 
 function Login({onLoginPatient,onLoginMedic,onLogoffMedic,onLogoffPatient}){
 
+    // Esto nos ayudara a poder movernos entre las paginas
+
     const navigate = useNavigate(); 
+    
+    //Esta parte nos ayudara a poder recibir datos desde el URL sin que el usuario vea esos datos. 
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const rol = queryParams.get('rol');
@@ -16,11 +20,18 @@ function Login({onLoginPatient,onLoginMedic,onLogoffMedic,onLogoffPatient}){
 // Array de inputs
     const camposFormulario = [inputUsuario, inputContraseña];
 
+    //Esta es la funcion que controla el Login, recibe como parametro los datos del form.
     const handleLogin =(formData) => {
+         
+        //Aqui vemos si el form incluye datos y sino automaticamente va un id general, esto para 
+        // fines de demostracion y se pueda iniciar sin usuario asignado
 
         const idPaciente = formData.nombre?.trim() || 101; 
         const idDoctor = formData.nombre?.trim() || 201; 
-        // Para verificar que tenga el campo `nombre`
+
+        // Verifica el campo rol que se nos mando por el url (sin que el usuario lo vea por seguridad) y dependiendo
+        // el resultado lo dirige al dashboard del medico o del paciente. Asimismo se hace uso del localStorage
+        // para poder guardar los datos de incio y que el usuario pueda navegar al home o a otra pagina sin tener que cerrar su sesion.
 
         if(rol==='paciente'){
 
@@ -45,6 +56,9 @@ function Login({onLoginPatient,onLoginMedic,onLogoffMedic,onLogoffPatient}){
 
     };
 
+    // Aqui se usa el componente que se creo de Forms y se mandan los campos (con sus respectivos)
+    // datos y la funcion de handleLogin. 
+    
     return(
         <div>
             <Formulario campos={camposFormulario} handleLogin={handleLogin}/>

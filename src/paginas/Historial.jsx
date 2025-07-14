@@ -2,8 +2,11 @@ import { useState } from 'react';
 
 function Historial({doctores,pacientes,historialConsultas}){
 
+    //Declaramos los useState que usaremos
    const [busqueda, setBusqueda] = useState('');
 
+
+  //Esto simula el backend filtrando los datos mandados y devolviendo solo aquellos que coincidan con la busqueda
   const historialFiltrado = historialConsultas.filter((consulta) => {
   const paciente = pacientes.find(p => p.id === consulta.pacienteId);
   return paciente?.nombre.toLowerCase().includes(busqueda.toLowerCase());
@@ -13,6 +16,9 @@ function Historial({doctores,pacientes,historialConsultas}){
     <div className="card__container">
       <h2>Historial</h2>
 
+
+         {/* Aqui inicia el buscador */}
+
         <input
           type="text"
           placeholder="Ingrese el nombre del paciente"
@@ -21,6 +27,9 @@ function Historial({doctores,pacientes,historialConsultas}){
           className="form-control mb-3 card__input"
       />
 
+      {/* Se itera usando maps para poder crear un card para cada consulta y a su vez se obtienen
+      los nombre del paciente y del doctor ya que estos vienen como id*/}
+      
       {historialFiltrado.map((consulta) => {
         const paciente = pacientes.find(p => p.id === consulta.pacienteId);
         const doctor = doctores.find(d => d.id === consulta.doctorConsultaId);
